@@ -121,7 +121,7 @@ Node* initHead (){
     Node*head = (Node*)malloc(sizeof(Node));
     head->data = 1;
     head->next = NULL;
-    printf("头节点创建成功 ");
+    printf("头节点创建成功\n");
 
     return head;
 }
@@ -135,7 +135,7 @@ void  insertHead(Node *L , elem n){
      p->data = n;
      p->next = L->next;
      L->next = p;
-     
+     printf("插入%d成功\n",n);
 }
 //遍历链表
 void scanList(Node *L) {
@@ -173,7 +173,7 @@ void insertTail(Node*L, elem n){
           p = p->next;
      }
      p->next = q;
-     
+     printf("插入%d成功\n",n);
 }
 // 中间插入
 void insertMiddle(Node *L, int pos, elem n){   //pos 代表插入在哪个节点的后面
@@ -189,8 +189,7 @@ void insertMiddle(Node *L, int pos, elem n){   //pos 代表插入在哪个节点
      q->data = n;
      q->next = p->next;
      p->next = q;
-     
-
+     printf("插入%d成功\n",n);
 }
 //删除数据
 Node* deleteList(Node *L, elem pos) {
@@ -201,7 +200,8 @@ Node* deleteList(Node *L, elem pos) {
     Node *p = L;
     if (pos == 1) { // 如果要删除的是头节点
         Node *q = L->next;
-        L = q;
+        L = L->next;
+        printf("你删除了：%d\n", p->data);
         free(p);
         return L;
     }
@@ -221,35 +221,11 @@ Node* deleteList(Node *L, elem pos) {
     }
 
     p->next = q->next; // 从链表中移除 q
-   
+    printf("你删除了：%d\n", q->data);
     free(q); // 释放 q 的内存
 
     return L; // 返回头节点
 }
-// c操作
-void make_circle (Node *L){                                  //判断输入的头节点是否有效
-      if (L == NULL || L->next == NULL) {
-        printf("链表为空或只有一个节点，无法形成循环链表\n");
-        return;
-    }                                                  
-    Node *p = L;
-    while(p ->next != NULL){    //找到尾节点及尾节点的地址，这个时候的p就是指向单链表尾节点的
-        p = p->next;
-    }
-      p ->next = L;
-}
-void print_circle_list(Node *L){        //构建一个打印循环链表的函数
-     Node *p = L;
-     while(p->next != L){
-        p =  p ->next;
-        printf("%d ",p->data);
-
-     }
-    printf("...");     //表示这个是一个循环链表
-}
-
-//下面是题目的做答
-
 int main(){
     Node*q = initHead (); //初始化一个头节点
 //T 1 1 1
@@ -306,13 +282,18 @@ int main(){
     insertHead(s, 1);  //插入data1
     insertHead(s, 1);  //插入data2
     insertHead(s, 1);  //插入data3
-// c    
-    make_circle(s);
-    print_circle_list(s);
     
+    
+    scanList(s);
 
     return 0;
 }    
+
+
+
+
+    
+
 
 
 ```
